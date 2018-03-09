@@ -4,11 +4,10 @@
 // Client String for accessing api
 var clientString = "?client_id=" + "5ca96fac2f6435f593ce5e08a4b60ba6ef03e83e0bd55630c8bdd4fe7d2f52ef";
 
-window.onload = () => {
-}
 
 //Make a request to the unsplash API and update the display
-function getAndUpdate(query){
+function getAndUpdate(){
+  var query = document.getElementById('query').value;
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange=function(){
 
