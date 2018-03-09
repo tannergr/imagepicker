@@ -32,7 +32,6 @@ function getAndUpdate(isSearch){
 
          // Get page count for page buttons and display next button
          totalPages = Data.total_pages;
-         console.log(totalPages);
          if(totalPages > 1) document.getElementById("next").style.display = "inline";
 
          // Get image results
@@ -50,6 +49,11 @@ function getAndUpdate(isSearch){
          for(i = 0; i < Data.length; i++) // Insert into HTML
            document.getElementById("results").innerHTML += createImgDiv(Data[i], i);
      }
+    else if (this.status == 403) {
+      document.getElementById("results").innerHTML = `
+         \<h1 id="nores"> API Limit Reached \</h1>
+      `;
+    }
   }
   xhttp.open(
     "GET",
@@ -126,7 +130,6 @@ function changePage(direction){
     if(currentPage <= 1) return; // if on first page don't do anything
     currentPage -=1;
   }
-  console.log(currentPage);
 
   // Disable next button if on last page and enable otherwise
   if(currentPage >= totalPages-1){
@@ -150,7 +153,6 @@ function viewOldBG(){
   var Data = JSON.parse(localStorage.getItem("bg-images"));
   currentImages = Data;
 
-  currentImages.reverse(); // Most recent at top
 
   // Display message if no results found
   if(!Data) {
@@ -165,6 +167,7 @@ function viewOldBG(){
     `;
     return;
   }
+  currentImages.reverse(); // Most recent at top
   document.getElementById("results").innerHTML = "";
   // Iterate through results
   for(i = 0; i < Data.length; i++){
@@ -179,7 +182,6 @@ function viewOldBG(){
 window.onload = () =>{
   // Check for background history
   if(localStorage.getItem("bg-images")){
-    console.log(localStorage.getItem("bg-images"));
     // Set background image from local storage
     var bg = document.getElementById("background");
     var imgHistory = JSON.parse(localStorage.getItem("bg-images"));
@@ -189,7 +191,6 @@ window.onload = () =>{
   }
   //Update while typing
   document.getElementById("query").addEventListener("input", () =>{
-    console.log("updating");
     getAndUpdate(true);
   });
 }
