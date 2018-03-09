@@ -83,11 +83,20 @@ function setBackground(){
   //Get background element
   var bg = document.getElementById("background");
   // Get index via selected image div id
-  var index = parseInt(selectedImageDiv.id)
+  var index = parseInt(selectedImageDiv.id);
   bg.style.backgroundImage = `url("${currentImages[index].urls.full})`;
 
-  // Set storage for background persistance (using the assumption that there is only one cookie)
-  localStorage.setItem("bg-image", currentImages[index].urls.full)
+  // Set storage for background persistance
+  // Check for exixting history to append to else create new array
+  if(localStorage.getItem("bg-images")){
+    var imgHistoryString = localStorage.getItem("bg-images");
+    var imgHistory =  JSON.parse(imgHistoryString);
+  }
+  else
+    var imgHistory = [];
+  imgHistory.push(currentImages[index]);
+  //Convert array to string for storage
+  localStorage.setItem("bg-images", JSON.stringify(imgHistory));
 }
 
 // function for changing page of Results
@@ -124,11 +133,49 @@ function changePage(direction){
   getAndUpdate();
 }
 
+// Get Background History and display on screen
+function viewOldBG(){
+  var Data = JSON.parse(localStorage.getItem("bg-images"));
+  currentImages = Data;
+
+  // Display message if no results found
+  if(!Data) {
+    document.getElementById("results").innerHTML = `
+       \<h1 id="nores"> No Results Found \</h1>
+    `;
+    return;
+  }
+  if( Data.length <= 0){
+    document.getElementById("results").innerHTML = `
+       \<h1 id="nores"> No Results Found \</h1>
+    `;
+    return;
+  }
+  document.getElementById("results").innerHTML = "";
+  // Iterate through results
+  for(i = 0; i < Data.length; i++){
+    // insert image into html
+    document.getElementById("results").innerHTML +=
+    `
+      <div
+         id="${i.toString()}"
+         onclick="selectImage('${i.toString()}')"
+         class="image"
+      >
+      \<img src="${Data[i].urls.thumb}" >
+      </div>
+    `;
+  }
+}
+
 window.onload = () =>{
-  if(localStorage.getItem("bg-image")){
-    console.log(localStorage.getItem("bg-image"));
-    // Set background image from cookie
-    var bg = document.getElementById("background")
-    bg.style.backgroundImage = `url("${localStorage.getItem("bg-image")}")`;
+  if(localStorage.getItem("bg-images")){
+    console.log(localStorage.getItem("bg-images"));
+    // Set background image from local storage
+    var bg = document.getElementById("background");
+    var imgHistory = JSON.parse(localStorage.getItem("bg-images"));
+    var lastImage = imgHistory[imgHistory.length-1];
+    console.log(lastImage);
+    bg.style.backgroundImage = `url("${lastImage.urls.full}")`;
   }
 }
