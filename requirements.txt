@@ -8,7 +8,11 @@ Assumed Requirements:
 5. Update results while user is typing.
 6. Allow user to see multiple pages of results.
 7. Display message when no results found.
-8. Background image is persistent through multiple sessions.
+
+Stretch Goals:
+8. persist the history of background changes in local storage so that I can see my past selections when I come back to the site.
+
+9. Allow user to choose from a small selection of instagram like filters before setting as background.
 
 Constraints:
 1. No jquery, just vanilla js.
