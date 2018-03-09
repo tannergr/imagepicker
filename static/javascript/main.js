@@ -2,7 +2,7 @@
 // and updating the user interface
 
 // Client String for accessing api
-var clientString = "?client_id=" + "5ca96fac2f6435f593ce5e08a4b60ba6ef03e83e0bd55630c8bdd4fe7d2f52ef";
+var clientString = "?client_id=" + "2f2aa3215d95786fe0c05d11103baff196da6591349533fe45381565d7e6a12e";
 // Keep a list of current data from api request
 var currentImages = [];
 // Keep track of the current selected image
@@ -32,6 +32,7 @@ function getAndUpdate(isSearch){
 
          // Get page count for page buttons and display next button
          totalPages = Data.total_pages;
+         console.log(totalPages);
          if(totalPages > 1) document.getElementById("next").style.display = "inline";
 
          // Get image results
@@ -125,9 +126,10 @@ function changePage(direction){
     if(currentPage <= 1) return; // if on first page don't do anything
     currentPage -=1;
   }
+  console.log(currentPage);
 
   // Disable next button if on last page and enable otherwise
-  if(currentPage >= totalPages){
+  if(currentPage >= totalPages-1){
     document.getElementById("next").style.display = "none";
   }
   else
@@ -185,4 +187,9 @@ window.onload = () =>{
     console.log(lastImage);
     bg.style.backgroundImage = `url("${lastImage.urls.full}")`;
   }
+  //Update while typing
+  document.getElementById("query").addEventListener("input", () =>{
+    console.log("updating");
+    getAndUpdate(true);
+  });
 }
