@@ -1,5 +1,24 @@
+.body{
+  padding: 0;
+  margin: 0;
+  font-family: 'Raleway', sans-serif;
+}
 .image{
-  padding: 30px;
+  padding: 10px;
+  position: relative;
+  border-radius: 5px;
+  margin: 10px;
+  background-color: rgba(255,255,255,0.3);
+}
+.image:hover{
+  background-color: rgba(255,255,255,0.6);
+}
+#results{
+  padding: 0;
+  margin: 0;
+  display: flex;
+  max-width: 100%;
+  flex-flow: row wrap;
 }
 #background{
   height: 100%;
@@ -13,7 +32,44 @@
 }
 #prev{
   display: none;
+  position:fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
 }
 #next{
   display:none;
+  position:fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+}
+#query{
+  -webkit-appearance: none;
+  background-color: rgba(255,255,255,0.5);
+  font-size: 24px;
+  border: none;
+  padding:10px;
+  margin: 10px;
+  font-family: 'Raleway', sans-serif;
+}
+#query:focus{
+  background-color: rgba(255,255,255,1);
+}
+.button{
+  -webkit-appearance: none;
+  background-color: rgba(255,255,255,0.5);
+  font-size: 24px;
+  border: none;
+  padding:10px;
+  margin: 10px;
+  font-family: 'Raleway', sans-serif;
+}
+.button:hover{
+  background-color: rgba(255,255,255,1);
+  cursor: pointer;
+}
+.navButtons{
+  display: inline;
+  float: right;
 }

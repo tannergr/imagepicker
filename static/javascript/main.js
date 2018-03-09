@@ -2,7 +2,7 @@
 // and updating the user interface
 
 // Client String for accessing api
-var clientString = "?client_id=" + "2f2aa3215d95786fe0c05d11103baff196da6591349533fe45381565d7e6a12e";
+var clientString = "?client_id=" + "5ca96fac2f6435f593ce5e08a4b60ba6ef03e83e0bd55630c8bdd4fe7d2f52ef";
 // Keep a list of current data from api request
 var currentImages = [];
 // Keep track of the current selected image
@@ -29,7 +29,7 @@ function getAndUpdate(isSearch){
 
          // Get page count for page buttons and display next button
          totalPages = Data.total_pages;
-         if(totalPages > 1) document.getElementById("next").style.display = "block";
+         if(totalPages > 1) document.getElementById("next").style.display = "inline";
 
          // Get image results
          Data = Data.results;
@@ -50,8 +50,9 @@ function getAndUpdate(isSearch){
              <div
                 id="${i.toString()}"
                 onclick="selectImage('${i.toString()}')"
+                class="image"
              >
-             \<img src="${Data[i].urls.thumb}" class="image">
+             \<img src="${Data[i].urls.thumb}" >
              </div>
            `;
          }
@@ -69,7 +70,8 @@ function selectImage(index, imageData){
     selectedImageDiv.style.backgroundColor = "";
   // Update Selected image
   selectedImageDiv = document.getElementById(index);
-  selectedImageDiv.style.backgroundColor = "blue";
+  selectedImageDiv.style.backgroundColor = "rgba(55, 255, 15, 0.3)";
+  selectedImageDiv.style.borderRadius = "10px";
 }
 
 // Function updates the background of page to the currently selected images
@@ -110,13 +112,13 @@ function changePage(direction){
     document.getElementById("next").style.display = "none";
   }
   else
-    document.getElementById("next").style.display = "block";
+    document.getElementById("next").style.display = "inline";
 
   // Disable previous button if on first page and enable otherwise
   if(currentPage <= 1)
     document.getElementById("prev").style.display = "none";
   else
-    document.getElementById("prev").style.display = "block";
+    document.getElementById("prev").style.display = "inline";
 
   // Make a request for the next page of data
   getAndUpdate();

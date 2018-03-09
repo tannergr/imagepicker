@@ -6,16 +6,17 @@
   <title> Image Picker </title>
   <script src="javascript/unsplash.js"></script>
   <script src="javascript/main.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
   <div id="background"></div>
   <div id="usercontrols">
     <input type="text" placeholder="Search Images" id="query">
-    <input type="submit" onclick='getAndUpdate(true)' value="Search">
-    <input type="submit" onclick='setBackground()' value="Set background">
-    <input type="submit" onclick='changePage(0)' value="Prev Page" id="prev">
-    <input type="submit" onclick='changePage(1)' value="Next Page" id="next">
+    <input class="button" type="submit" onclick='getAndUpdate(true)' value="Search">
+    <input class="button" type="button" onclick='setBackground()' value="Set background">
+    <input class="button" type="button" onclick='changePage(0)' value="Prev Page" id="prev">
+    <input class="button" type="button" onclick='changePage(1)' value="Next Page" id="next">
   </div>
   <div id="results"></div>
 </body>
