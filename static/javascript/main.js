@@ -2,7 +2,7 @@
 // and updating the user interface
 
 // Client String for accessing api
-var clientString = "?client_id=" + "2f2aa3215d95786fe0c05d11103baff196da6591349533fe45381565d7e6a12e";
+var clientString = "?client_id=" + "5ca96fac2f6435f593ce5e08a4b60ba6ef03e83e0bd55630c8bdd4fe7d2f52ef";
 
 window.onload = () => {
   getAndUpdate();
@@ -12,13 +12,15 @@ window.onload = () => {
 function getAndUpdate(){
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange=function(){
+    // Wait for valid response from request
     if (this.readyState == 4 && (this.status == 200)) {
-
          console.log("ready")
+         // Parse response data into JSON object
          var Data = JSON.parse(this.responseText);
-         console.log(Data[1]);
+         // Iterate through results
          for(i = 0; i < Data.length; i++){
-           document.getElementById("res").innerHTML += `
+           // insert image into html
+           document.getElementById("results").innerHTML += `
             \<img src="${Data[i].urls.thumb}">
            `;
          }
