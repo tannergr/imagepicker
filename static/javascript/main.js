@@ -46,25 +46,35 @@ function getAndUpdate(isSearch){
          }
          document.getElementById("results").innerHTML = "";
          // Iterate through results and add to results
-         for(i = 0; i < Data.length; i++){
-           // insert image into html
-           document.getElementById("results").innerHTML +=
-           `
-             <div
-                id="${i.toString()}"
-                onclick="selectImage('${i.toString()}')"
-                class="image"
-             >
-             \<img src="${Data[i].urls.thumb}" >
-             </div>
-           `;
-         }
-
+         for(i = 0; i < Data.length; i++) // Insert into HTML
+           document.getElementById("results").innerHTML += createImgDiv(Data[i], i);
      }
   }
-  xhttp.open("GET", "https://api.unsplash.com/search/photos"+clientString+"&query="+query+"&page="+currentPage, true);
+  xhttp.open(
+    "GET",
+    "https://api.unsplash.com/search/photos"+clientString+
+    "&query="+query+
+    "&page="+currentPage,
+    true
+  );
   xhttp.send();
 }
+// Takes in image data and index and return div element
+function createImgDiv(Datum, i){
+  return (
+    `
+      <div
+         id="${i.toString()}"
+         onclick="selectImage('${i.toString()}')"
+         class="image"
+      >
+      \<img src="${Datum.urls.thumb}" >
+      </div>
+    `
+  );
+}
+
+
 // Function updates the style of the current selected images
 // and sets the selected image variable
 function selectImage(index, imageData){
@@ -157,16 +167,7 @@ function viewOldBG(){
     // insert image into html
     // Div sets id based on index of results and passes that reference to the
     // click function
-    document.getElementById("results").innerHTML +=
-    `
-      <div
-         id="${i.toString()}"
-         onclick="selectImage('${i.toString()}')"
-         class="image"
-      >
-      \<img src="${Data[i].urls.thumb}" >
-      </div>
-    `;
+    document.getElementById("results").innerHTML += createImgDiv(Data[i], i);
   }
 }
 
