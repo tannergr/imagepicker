@@ -1,0 +1,14 @@
+Explicit Requirements
+1. Allow user to type in search query.
+2. Get image results via unsplash API.
+3. Display results to web page.
+4. Allow user to select an image and set as background.
+
+Assumed Requirements:
+5. Update results while user is typing.
+6. Allow user to see multiple pages of results.
+7. Display message when no results found.
+8. Background image is persistent through multiple sessions.
+
+Constraints:
+1. No jquery, just vanilla js.
