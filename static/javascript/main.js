@@ -61,4 +61,16 @@ function setBackground(){
   // Get index via selected image div id
   var index = parseInt(selectedImageDiv.id)
   bg.style.backgroundImage = `url("${currentImages[index].urls.full})`;
+
+  // Set storage for background persistance (using the assumption that there is only one cookie)
+  localStorage.setItem("bg-image", currentImages[index].urls.full)
+}
+
+window.onload = () =>{
+  if(localStorage.getItem("bg-image")){
+    console.log(localStorage.getItem("bg-image"));
+    // Set background image from cookie
+    var bg = document.getElementById("background")
+    bg.style.backgroundImage = `url("${localStorage.getItem("bg-image")}")`;
+  }
 }
