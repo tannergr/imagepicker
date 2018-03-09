@@ -12,8 +12,10 @@
   <div id="background"></div>
   <div id="usercontrols">
     <input type="text" placeholder="Search Images" id="query">
-    <input type="submit" onclick='getAndUpdate()' value="Search">
+    <input type="submit" onclick='getAndUpdate(true)' value="Search">
     <input type="submit" onclick='setBackground()' value="Set background">
+    <input type="submit" onclick='changePage(0)' value="Prev Page" id="prev">
+    <input type="submit" onclick='changePage(1)' value="Next Page" id="next">
   </div>
   <div id="results"></div>
 </body>
