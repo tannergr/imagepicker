@@ -6,11 +6,14 @@
   <title> Image Picker </title>
   <script src="javascript/unsplash.js"></script>
   <script src="javascript/main.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+  <div id="background"></div>
   <div id="usercontrols">
     <input type="text" placeholder="Search Images" id="query">
-    <input type="submit" onclick='getAndUpdate()'>
+    <input type="submit" onclick='getAndUpdate()' value="Search">
+    <input type="submit" onclick='setBackground()' value="Set background">
   </div>
   <div id="results"></div>
 </body>

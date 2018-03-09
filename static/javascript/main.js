@@ -3,8 +3,10 @@
 
 // Client String for accessing api
 var clientString = "?client_id=" + "5ca96fac2f6435f593ce5e08a4b60ba6ef03e83e0bd55630c8bdd4fe7d2f52ef";
+// Keep a list of current data from api request
 var currentImages = [];
-var selectedImage;
+// Keep track of the current selected image
+var selectedImageDiv;
 
 //Make a request to the unsplash API and update the display
 function getAndUpdate(){
@@ -24,7 +26,10 @@ function getAndUpdate(){
            // insert image into html
            document.getElementById("results").innerHTML +=
            `
-             <div id="${i.toString()}" onclick="selectImage('${i.toString()}')">
+             <div
+                id="${i.toString()}"
+                onclick="selectImage('${i.toString()}')"
+             >
              \<img src="${Data[i].urls.thumb}" class="image">
              </div>
            `;
@@ -35,12 +40,25 @@ function getAndUpdate(){
   xhttp.open("GET", "https://api.unsplash.com/search/photos"+clientString+"&query="+query, true);
   xhttp.send();
 }
+// Function updates the style of the current selected images
+// and sets the selected image variable
+function selectImage(index, imageData){
+  // Remove background indicator of previous selected image
+  if(selectedImageDiv)
+    selectedImageDiv.style.backgroundColor = "";
+  // Update Selected image
+  selectedImageDiv = document.getElementById(index);
+  selectedImageDiv.style.backgroundColor = "blue";
+}
 
-function selectImage(index){
-  console.log("image selected");
-  if(selectedImage)
-    selectedImage.style.backgroundColor = "";
-  selectedImage = document.getElementById(index);
-  selectedImage.style.backgroundColor = "blue";
-  console.log(selectedImage);
+// Function updates the background of page to the currently selected images
+function setBackground(){
+  if(!selectedImageDiv){
+    alert("Select an Image")
+  }
+  //Get background element
+  var bg = document.getElementById("background")
+  // Get index via selected image div id
+  var index = parseInt(selectedImageDiv.id)
+  bg.style.backgroundImage = `url("${currentImages[index].urls.full})`;
 }
