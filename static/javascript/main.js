@@ -7,6 +7,7 @@ var clientString = "?client_id=" + "5ca96fac2f6435f593ce5e08a4b60ba6ef03e83e0bd5
 var currentImages = [];
 // Keep track of the current selected image
 var selectedImageDiv;
+// Keep track of pages for navigation
 var totalPages;
 var currentPage = 1;
 
@@ -14,13 +15,15 @@ var currentPage = 1;
 // takes in a boolean to tell if this was called by the search in order to
 // reset next and previous buttons
 function getAndUpdate(isSearch){
-  if(isSearch){
+  if(isSearch){ // Reset page counters and nav buttons
     document.getElementById("next").style.display = "none";
     document.getElementById("prev").style.display = "none";
     currentPage = 1;
   }
   var query = document.getElementById('query').value;
   var xhttp = new XMLHttpRequest();
+
+  // This function executes when the request has completed
   xhttp.onreadystatechange=function(){
     // Wait for valid response from request
     if (this.readyState == 4 && (this.status == 200)) {
@@ -42,7 +45,7 @@ function getAndUpdate(isSearch){
            `;
          }
          document.getElementById("results").innerHTML = "";
-         // Iterate through results
+         // Iterate through results and add to results
          for(i = 0; i < Data.length; i++){
            // insert image into html
            document.getElementById("results").innerHTML +=
@@ -102,16 +105,13 @@ function setBackground(){
 // function for changing page of Results
 // takes in a 0 for previous page and 1 for next page
 function changePage(direction){
-
   // Change the current page based on direction
-  // Next Page
-  if(direction){
+  if(direction){ // Next Page
     if(currentPage >= totalPages) return; // if last page don't do anything
     currentPage += 1;
 
   }
-  // Prev Page
-  else {
+  else { // Prev Page
     if(currentPage <= 1) return; // if on first page don't do anything
     currentPage -=1;
   }
@@ -155,6 +155,8 @@ function viewOldBG(){
   // Iterate through results
   for(i = 0; i < Data.length; i++){
     // insert image into html
+    // Div sets id based on index of results and passes that reference to the
+    // click function
     document.getElementById("results").innerHTML +=
     `
       <div
@@ -168,7 +170,9 @@ function viewOldBG(){
   }
 }
 
+// What to do when loading
 window.onload = () =>{
+  // Check for background history
   if(localStorage.getItem("bg-images")){
     console.log(localStorage.getItem("bg-images"));
     // Set background image from local storage
