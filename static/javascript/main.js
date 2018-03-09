@@ -148,6 +148,8 @@ function viewOldBG(){
   var Data = JSON.parse(localStorage.getItem("bg-images"));
   currentImages = Data;
 
+  currentImages.reverse(); // Most recent at top
+
   // Display message if no results found
   if(!Data) {
     document.getElementById("results").innerHTML = `
