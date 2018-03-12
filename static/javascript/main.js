@@ -71,9 +71,9 @@ function createImgDiv(Datum, i){
       <div
          id="${i.toString()}"
          onclick="selectImage('${i.toString()}')"
-         class="image"
+
       >
-      \<img src="${Datum.urls.thumb}" >
+      \<img src="${Datum.urls.thumb}" class="image" >
       </div>
     `
   );
@@ -85,11 +85,11 @@ function createImgDiv(Datum, i){
 function selectImage(index, imageData){
   // Remove background indicator of previous selected image
   if(selectedImageDiv)
-    selectedImageDiv.style.backgroundColor = "";
+    selectedImageDiv.childNodes[1].style.backgroundColor = "";
   // Update Selected image
   selectedImageDiv = document.getElementById(index);
-  selectedImageDiv.style.backgroundColor = "rgba(55, 255, 15, 0.3)";
-  selectedImageDiv.style.borderRadius = "10px";
+  selectedImageDiv.childNodes[1].style.backgroundColor = "rgba(55, 255, 15, 0.3)";
+  // selectedImageDiv.style.borderRadius = "10px";
 }
 
 // Function updates the background of page to the currently selected images
